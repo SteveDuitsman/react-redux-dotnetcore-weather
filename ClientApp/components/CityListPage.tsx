@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import * as CityListStore from '../store/CityListStore';
 
-interface ConditionsProps {
-  imageSource: string,
-  altText: string
-}
+type ConditionsProps = CityListStore.ConditionsState;
 
 class Conditions extends React.Component<ConditionsProps, void> {
   render() {
@@ -17,14 +15,7 @@ class Conditions extends React.Component<ConditionsProps, void> {
   }
 }
 
-interface ForecastSummaryProps {
-  city: string,
-  state: string,
-  zip: number,
-  highTemp: number,
-  lowTemp: number,
-  precipitationChance: number,
-}
+type ForecastSummaryProps = CityListStore.ForecastSummaryState;
 
 class ForecastSummary extends React.Component<ForecastSummaryProps, void> {
   render() {
@@ -34,9 +25,30 @@ class ForecastSummary extends React.Component<ForecastSummaryProps, void> {
           <strong>{this.props.city}, {this.props.state}</strong>
         </div>
         <div className="temps">
+          <strong>{this.props.current_temp}</strong>
           <p>{this.props.highTemp}&nbsp;|&nbsp;{this.props.lowTemp}</p>
-          <p><i class="fa fa-tint fa-lg"></i>{this.props.precipitationChance}%</p>
+          <p><i className="fa fa-tint fa-lg"></i>{this.props.precipitationChance}%</p>
         </div>
+      </div>
+    );
+  }
+}
+
+type CityRowProps = CityListStore.CityConditions;
+
+class CityRow extends React.Component<CityRowProps, void> {
+  render() {
+    return (
+      <div>
+        <Conditions icon_url={this.props.current_observation.icon_url} 
+                    icon={this.props.current_observation.icon} />
+        <ForecastSummary city={this.props.current_observation.display_location.city} 
+                         state={this.props.current_observation.display_location.state}
+                         zip={this.props.current_observation.display_location.zip}
+                         current_temp={this.props.current_observation.temp_f}
+                         highTemp={this.props.current_observation.temp_f}
+                         lowTemp={this.props.current_observation.temp_f}
+                         precipitationChance="0" />
       </div>
     );
   }
@@ -50,6 +62,8 @@ class CityList extends React.Component<CityListProps, void> {
   render() {
     return (
       <div>
+
+      </div>
     );
   }
 }
