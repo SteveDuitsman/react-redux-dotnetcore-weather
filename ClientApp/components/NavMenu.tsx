@@ -34,7 +34,7 @@ export class NavMenu extends React.Component<void, void> {
                         </li>
                         <li>
                             <Link to={ '/citylistpage' } activeClassName='active'>
-                                <span className="glyphicons glyphicons-storm"></span> Weather Conditions
+                                <span className='glyphicon glyphicon-cloud'></span> Weather Conditions
                             </Link>
                         </li>
                     </ul>

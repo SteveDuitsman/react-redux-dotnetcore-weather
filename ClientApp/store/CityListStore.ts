@@ -4,8 +4,8 @@ import { Action, Reducer } from 'redux';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface CityListState {
-  cityList: Array<Object>,
-  forecasts: Array<CityConditions>,
+  cityList: Object[],
+  forecasts: CityConditions[],
   isLoading: boolean
 };
 

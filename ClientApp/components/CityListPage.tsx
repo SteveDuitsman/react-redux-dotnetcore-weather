@@ -65,7 +65,13 @@ class CityList extends React.Component<CityListProps, void> {
   render() {
     return (
       <div>
-        CITYZ
+        <h1>Weather Conditions</h1>
+        { 
+          !!this.props.forecasts && 
+          this.props.forecasts.map(conditions =>
+            <CityRow current_observation={conditions.current_observation} response={conditions.response} />
+          )
+        }
       </div>
     );
   }
