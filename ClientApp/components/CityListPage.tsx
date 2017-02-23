@@ -80,7 +80,7 @@ class CityList extends React.Component<CityListProps, void> {
         { 
           !!this.props.forecasts && 
           this.props.forecasts.map(conditions =>
-            <CityRow key={`${conditions.current_observation.station_id}${conditions.current_observation.observation_epoch}`} 
+            <CityRow key={`${conditions.current_observation.display_location.latitude}${conditions.current_observation.display_location.longitude}`} 
                      current_observation={conditions.current_observation} 
                      response={conditions.response} />
           )
