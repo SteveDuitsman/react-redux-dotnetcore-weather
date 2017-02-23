@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { ApplicationState }  from '../store';
 import * as CityListStore from '../store/CityListStore';
 
 type ConditionsProps = CityListStore.ConditionsState;
@@ -54,16 +55,23 @@ class CityRow extends React.Component<CityRowProps, void> {
   }
 }
 
-interface CityListProps {
-  cityConditions: Object,
-}
+// At runtime, Redux will merge together...
+type CityListProps =
+    CityListStore.CityListState     // ... state we've requested from the Redux store
+    & typeof CityListStore.actionCreators   // ... plus action creators we've requested
+    & { };       // ... plus incoming routing parameters
 
 class CityList extends React.Component<CityListProps, void> {
   render() {
     return (
       <div>
-
+        CITYZ
       </div>
     );
   }
 }
+
+export default connect(
+    (state: ApplicationState) => state.cityList, // Selects which state properties are merged into the component's props
+    CityListStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(CityList);
