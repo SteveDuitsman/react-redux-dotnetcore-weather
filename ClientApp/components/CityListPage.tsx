@@ -10,7 +10,7 @@ class Conditions extends React.Component<ConditionsProps, void> {
   render() {
     return (
       <div className="conditions">
-        <img src="{this.props.imageSource}" alt="{this.props.altText}" />
+        <img src={this.props.icon_url} alt={this.props.icon} />
       </div>
     );
   }
@@ -27,8 +27,8 @@ class ForecastSummary extends React.Component<ForecastSummaryProps, void> {
         </div>
         <div className="temps">
           <strong>{this.props.current_temp}</strong>
-          <p>{this.props.highTemp}&nbsp;|&nbsp;{this.props.lowTemp}</p>
-          <p><i className="fa fa-tint fa-lg"></i>{this.props.precipitationChance}%</p>
+          {false && <p>{this.props.highTemp}&nbsp;|&nbsp;{this.props.lowTemp}</p>}
+          {false && <p><i className="fa fa-tint fa-lg"></i>{this.props.precipitationChance}%</p>}
         </div>
       </div>
     );
@@ -62,6 +62,17 @@ type CityListProps =
     & { };       // ... plus incoming routing parameters
 
 class CityList extends React.Component<CityListProps, void> {
+
+  componentWillMount() {
+      // This method runs when the component is first added to the page
+      this.props.requestCityConditionsList(this.props.cityList);
+  }
+
+  componentWillReceiveProps(nextProps: CityListProps) {
+      // This method runs when incoming props (e.g., route params) change
+      //this.props.requestCityConditionsList(nextProps.cityList);
+  }
+
   render() {
     return (
       <div>
@@ -69,7 +80,9 @@ class CityList extends React.Component<CityListProps, void> {
         { 
           !!this.props.forecasts && 
           this.props.forecasts.map(conditions =>
-            <CityRow current_observation={conditions.current_observation} response={conditions.response} />
+            <CityRow key={`${conditions.current_observation.station_id}${conditions.current_observation.observation_epoch}`} 
+                     current_observation={conditions.current_observation} 
+                     response={conditions.response} />
           )
         }
       </div>
