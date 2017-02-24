@@ -2,6 +2,8 @@ import { fetch, addTask } from 'domain-task';
 import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from './';
 
+//import { Actions } from '../actions/actionTypes';
+
 import initialForecasts from './sample json/city forecast data.json';
 
 // -----------------
@@ -11,7 +13,7 @@ export interface CityListState {
   cityList: City[],
   forecasts: CityConditions[],
   isLoading: boolean
-};
+}
 
 export interface ConditionsState {
   icon_url: string,
@@ -124,6 +126,16 @@ export interface CityConditions {
 // -----------------
 // ACTIONS
 
+class Actions {
+  public static readonly REQUEST_CITY_CONDITIONS_LIST = 'REQUEST_CITY_CONDITIONS_LIST';
+  public static readonly REQUEST_CITY_CONDITIONS = 'REQUEST_CITY_CONDITIONS';
+  public static readonly RECEIVE_CITY_CONDITIONS = 'RECEIVE_CITY_CONDITIONS';
+}
+
+type CityConditionActions = 'REQUEST_CITY_CONDITIONS_LIST'
+    | 'REQUEST_CITY_CONDITIONS'
+    | 'RECEIVE_CITY_CONDITIONS';
+
 interface RequestCityListAction {
     type: 'REQUEST_CITY_CONDITIONS_LIST',
     cityList: City[]
@@ -140,12 +152,6 @@ interface ReceiveCityConditionAction {
     forecast: CityConditions
 }
 
-// interface ReceiveCityConditionListAction {
-//     type: 'RECEIVE_CITY_CONDITIONS_LIST',
-//     cityList: City[],
-//     forecast: CityConditions
-// }
-
 type KnownAction = RequestCityListAction | RequestCityConditionsAction | ReceiveCityConditionAction;
 
 // ----------------
@@ -158,7 +164,7 @@ let createCityConditionsRequest = (city:City, dispatch) => {
   let fetchTask = fetch(url)
                     .then(response => response.json() as Promise<CityConditions>)
                     .then(data => {
-                        dispatch({ type: 'RECEIVE_CITY_CONDITIONS', forecast: data, city: city });
+                        dispatch({ type: Actions.RECEIVE_CITY_CONDITIONS, forecast: data, city: city });
                     });
   return fetchTask;
 };
@@ -170,14 +176,14 @@ export const actionCreators = {
   requestCityConditions: (city: City): AppThunkAction<KnownAction> => (dispatch, getState) => {
     let task = createCityConditionsRequest(city, dispatch);
     addTask(task); // Ensure server-side prerendering waits for this to complete
-    dispatch({ type: 'REQUEST_CITY_CONDITIONS', city: city });
+    dispatch({ type: Actions.REQUEST_CITY_CONDITIONS, city: city });
   },
 
   requestCityConditionsList: (cityList: City[]): AppThunkAction<KnownAction> => (dispatch, getState) => {
     for(let city of cityList) {
       let task = createCityConditionsRequest(city, dispatch);
       addTask(task);
-      dispatch({ type: 'REQUEST_CITY_CONDITIONS', city: city });
+      dispatch({ type: Actions.REQUEST_CITY_CONDITIONS, city: city });
     }
   }
 };
@@ -197,13 +203,13 @@ const unloadedState: CityListState = {
 
 export const reducer: Reducer<CityListState> = (state: CityListState, action: KnownAction) => {
     switch (action.type) {
-        case 'REQUEST_CITY_CONDITIONS':
+        case Actions.REQUEST_CITY_CONDITIONS:
           return {
             cityList: state.cityList,
             forecasts: state.forecasts,
             isLoading: true
           };
-        case 'RECEIVE_CITY_CONDITIONS':
+        case Actions.RECEIVE_CITY_CONDITIONS:
           let oldForecasts = state.forecasts;
           let unchangedCityList = state.cityList.filter(city => { 
             return city.City === action.city.City && 
@@ -220,7 +226,7 @@ export const reducer: Reducer<CityListState> = (state: CityListState, action: Kn
             forecasts: [...unchangedCityConditions, action.forecast],
             isLoading: false
           };
-        case 'REQUEST_CITY_CONDITIONS_LIST':
+        case Actions.REQUEST_CITY_CONDITIONS_LIST:
           return state;
         default:
             // The following line guarantees that every action in the KnownAction union has been covered by a case above
