@@ -2,7 +2,7 @@ import { fetch, addTask } from 'domain-task';
 import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from './';
 
-import initialForecasts from '../../sample json/city forecast data.json';
+import initialForecasts from './sample json/city forecast data.json';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
