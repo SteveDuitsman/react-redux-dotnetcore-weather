@@ -16,7 +16,7 @@
         "display_location": {
             "full": "New Berlin, WI",
             "city": "New Berlin",
-            "state": "WI"
+            "state": "WI",
             "state_name": "Wisconsin",
             "country": "US",
             "country_iso3166": "US",
@@ -182,6 +182,99 @@
         "forecast_url": "http://www.wunderground.com/US/WI/Wauwatosa.html",
         "history_url": "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KWIMILWA93",
         "ob_url": "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=43.071350,-88.014526",
+        "nowcast": ""
+    }
+},
+{
+    "response": {
+        "version": "0.1",
+        "termsofService": "http://www.wunderground.com/weather/api/d/terms.html",
+        "features": {
+            "conditions": 1
+        }
+    },
+    "current_observation": {
+        "image": {
+            "url": "http://icons.wxug.com/graphics/wu2/logo_130x80.png",
+            "title": "Weather Underground",
+            "link": "http://www.wunderground.com"
+        },
+        "display_location": {
+            "full": "San Antonio, TX",
+            "city": "San Antonio",
+            "state": "TX",
+            "state_name": "Texas",
+            "country": "US",
+            "country_iso3166": "US",
+            "zip": "78201",
+            "magic": "1",
+            "wmo": "99999",
+            "latitude": "29.46999931",
+            "longitude": "-98.52999878",
+            "elevation": "228.0"
+        },
+        "observation_location": {
+            "full": "Woodlawn Lake, San Antonio, Texas",
+            "city": "Woodlawn Lake, San Antonio",
+            "state": "Texas",
+            "country": "US",
+            "country_iso3166": "US",
+            "latitude": "29.471300",
+            "longitude": "-98.535301",
+            "elevation": "758 ft"
+        },
+        "estimated": {},
+        "station_id": "KTXSANAN496",
+        "observation_time": "Last Updated on February 24, 11:52 AM CST",
+        "observation_time_rfc822": "Fri, 24 Feb 2017 11:52:16 -0600",
+        "observation_epoch": "1487958736",
+        "local_time_rfc822": "Fri, 24 Feb 2017 11:53:38 -0600",
+        "local_epoch": "1487958818",
+        "local_tz_short": "CST",
+        "local_tz_long": "America/Chicago",
+        "local_tz_offset": "-0600",
+        "weather": "Clear",
+        "temperature_string": "82.9 F (28.3 C)",
+        "temp_f": 82.9,
+        "temp_c": 28.3,
+        "relative_humidity": "15%",
+        "wind_string": "From the NW at 5.0 MPH Gusting to 10.0 MPH",
+        "wind_dir": "NW",
+        "wind_degrees": 315,
+        "wind_mph": 5,
+        "wind_gust_mph": "10.0",
+        "wind_kph": 8,
+        "wind_gust_kph": "16.1",
+        "pressure_mb": "1009",
+        "pressure_in": "29.79",
+        "pressure_trend": "+",
+        "dewpoint_string": "30 F (-1 C)",
+        "dewpoint_f": 30,
+        "dewpoint_c": -1,
+        "heat_index_string": "NA",
+        "heat_index_f": "NA",
+        "heat_index_c": "NA",
+        "windchill_string": "NA",
+        "windchill_f": "NA",
+        "windchill_c": "NA",
+        "feelslike_string": "82.9 F (27 C)",
+        "feelslike_f": "82.9",
+        "feelslike_c": "27",
+        "visibility_mi": "10.0",
+        "visibility_km": "16.1",
+        "solarradiation": "--",
+        "UV": "6",
+        "precip_1hr_string": "0.00 in ( 0 mm)",
+        "precip_1hr_in": "0.00",
+        "precip_1hr_metric": " 0",
+        "precip_today_string": "0.00 in (0 mm)",
+        "precip_today_in": "0.00",
+        "precip_today_metric": "0",
+        "icon": "clear",
+        "icon_url": "http://icons.wxug.com/i/c/k/clear.gif",
+        "forecast_url": "http://www.wunderground.com/US/TX/San_Antonio.html",
+        "history_url": "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KTXSANAN496",
+        "ob_url": "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=29.471300,-98.535301",
         "nowcast": ""
     }
 }

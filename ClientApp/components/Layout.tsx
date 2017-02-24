@@ -1,5 +1,12 @@
 import * as React from 'react';
 import { NavMenu } from './NavMenu';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 export interface LayoutProps {
     body: React.ReactElement<any>;
@@ -7,15 +14,19 @@ export interface LayoutProps {
 
 export class Layout extends React.Component<LayoutProps, void> {
     public render() {
-        return <div className='container-fluid'>
-            <div className='row'>
+        return (
+          <MuiThemeProvider>
+            <div className='container-fluid'>
+                <div className='row'>
                 <div className='col-sm-3'>
                     <NavMenu />
                 </div>
                 <div className='col-sm-9'>
                     { this.props.body }
                 </div>
+                </div>
             </div>
-        </div>;
+          </MuiThemeProvider>
+        );
     }
 }

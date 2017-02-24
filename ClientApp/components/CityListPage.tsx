@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 import { ApplicationState }  from '../store';
 import * as CityListStore from '../store/CityListStore';
 
@@ -41,15 +44,19 @@ class CityRow extends React.Component<CityRowProps, void> {
   render() {
     return (
       <div>
-        <Conditions icon_url={this.props.current_observation.icon_url} 
-                    icon={this.props.current_observation.icon} />
-        <ForecastSummary city={this.props.current_observation.display_location.city} 
-                         state={this.props.current_observation.display_location.state}
-                         zip={this.props.current_observation.display_location.zip}
-                         current_temp={this.props.current_observation.temp_f}
-                         highTemp={this.props.current_observation.temp_f}
-                         lowTemp={this.props.current_observation.temp_f}
-                         precipitationChance="0" />
+        <Card>
+          <CardHeader
+            title={this.props.current_observation.display_location.city + ', ' + this.props.current_observation.display_location.state}
+            avatar={this.props.current_observation.icon_url}
+            subtitle={this.props.current_observation.temp_f+ 'F and ' + this.props.current_observation.icon }
+            actAsExpander={false}
+            showExpandableButton={false}
+          />
+          <CardActions>
+            <FlatButton label="Detailed Forecast" />
+            <FlatButton label="Radar" />
+          </CardActions>
+        </Card>
       </div>
     );
   }
@@ -65,7 +72,7 @@ class CityList extends React.Component<CityListProps, void> {
 
   componentWillMount() {
       // This method runs when the component is first added to the page
-      this.props.requestCityConditionsList(this.props.cityList);
+      //this.props.requestCityConditionsList(this.props.cityList);
   }
 
   componentWillReceiveProps(nextProps: CityListProps) {
