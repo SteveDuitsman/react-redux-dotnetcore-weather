@@ -9,6 +9,12 @@ import routes from './routes';
 import configureStore from './configureStore';
 import { ApplicationState }  from './store';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
 // Get the application-wide store instance, prepopulating with state from the server where available.
 const initialState = (window as any).initialReduxState as ApplicationState;
 const store = configureStore(initialState);
