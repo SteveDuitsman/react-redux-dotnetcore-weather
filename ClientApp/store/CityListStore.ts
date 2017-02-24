@@ -132,22 +132,26 @@ class Actions {
   public static readonly RECEIVE_CITY_CONDITIONS = 'RECEIVE_CITY_CONDITIONS';
 }
 
-type CityConditionActions = 'REQUEST_CITY_CONDITIONS_LIST'
-    | 'REQUEST_CITY_CONDITIONS'
-    | 'RECEIVE_CITY_CONDITIONS';
+type REQUEST_CITY_CONDITIONS_LIST = 'REQUEST_CITY_CONDITIONS_LIST';
+type REQUEST_CITY_CONDITIONS = 'REQUEST_CITY_CONDITIONS'
+type RECEIVE_CITY_CONDITIONS = 'RECEIVE_CITY_CONDITIONS';
+
+type CityConditionActions = REQUEST_CITY_CONDITIONS_LIST
+    | REQUEST_CITY_CONDITIONS
+    | RECEIVE_CITY_CONDITIONS;
 
 interface RequestCityListAction {
-    type: 'REQUEST_CITY_CONDITIONS_LIST',
+    type: REQUEST_CITY_CONDITIONS_LIST,
     cityList: City[]
 }
 
 interface RequestCityConditionsAction {
-    type: 'REQUEST_CITY_CONDITIONS',
+    type: REQUEST_CITY_CONDITIONS,
     city: City
 }
 
 interface ReceiveCityConditionAction {
-    type: 'RECEIVE_CITY_CONDITIONS',
+    type: RECEIVE_CITY_CONDITIONS,
     city: City,
     forecast: CityConditions
 }
@@ -198,7 +202,7 @@ const unloadedState: CityListState = {
     {City: "Wauwatosa", State: "WI", Zip: 53226},
     {City: "San Antonio", State: "TX", Zip: 78201},     
   ],
-  forecasts: initialForecasts
+  forecasts: []//initialForecasts
 };
 
 export const reducer: Reducer<CityListState> = (state: CityListState, action: KnownAction) => {

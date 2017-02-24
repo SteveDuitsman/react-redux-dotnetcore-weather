@@ -72,7 +72,7 @@ class CityList extends React.Component<CityListProps, void> {
 
   componentWillMount() {
       // This method runs when the component is first added to the page
-      //this.props.requestCityConditionsList(this.props.cityList);
+      this.props.requestCityConditionsList(this.props.cityList);
   }
 
   componentWillReceiveProps(nextProps: CityListProps) {
