@@ -1,6 +1,6 @@
 import * as WeatherForecasts from './WeatherForecasts';
 import * as Counter from './Counter';
-import * as CityConditionReducer from '../reducers/CityConditionsReducer';
+import CityConditionReducer from '../reducers/CityConditionsReducer';
 import {CityListState, ApplicationState} from '../models/Models';
 
 // The top-level state object

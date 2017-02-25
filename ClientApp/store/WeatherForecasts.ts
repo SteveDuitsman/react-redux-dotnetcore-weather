@@ -1,7 +1,7 @@
 import { fetch, addTask } from 'domain-task';
 import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from '../models/Models';
-import * as InitalState from '../reducers/InitialState';
+import initialState from '../reducers/InitialState';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -61,8 +61,6 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: WeatherForecastsState = { startDateIndex: null, forecasts: [], isLoading: false };
-
 export const reducer: Reducer<WeatherForecastsState> = (state: WeatherForecastsState, action: KnownAction) => {
     switch (action.type) {
         case 'REQUEST_WEATHER_FORECASTS':
@@ -87,5 +85,5 @@ export const reducer: Reducer<WeatherForecastsState> = (state: WeatherForecastsS
             const exhaustiveCheck: never = action;
     }
 
-    return state || InitalState.weatherForecasts;
+    return state || initialState.weatherForecasts;
 };

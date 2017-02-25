@@ -98,6 +98,8 @@ class CityList extends React.Component<CityListProps, void> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.cityList, // Selects which state properties are merged into the component's props
+    (state: ApplicationState) => {
+      return state.cityList;
+    }, // Selects which state properties are merged into the component's props
     CityConditionActions.actionCreators                 // Selects which action creators are merged into the component's props
 )(CityList);

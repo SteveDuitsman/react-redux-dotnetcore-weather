@@ -1,11 +1,12 @@
 import { Reducer } from 'redux';
 import { City, CityConditions, CityListState, ConditionsState, ForecastSummaryState } from '../models/Models';
 import { CityConditionActions, PossibleCityConditionActions } from '../actions/CityConditionActions';
+import initialState from '../reducers/InitialState';
 
 // -----------------
 // REDUCER
 
-export const reducer: Reducer<CityListState> = (state: CityListState, action: PossibleCityConditionActions) => {
+const reducer: Reducer<CityListState> = (state = initialState.cityList, action: PossibleCityConditionActions) => {
     switch (action.type) {
         case CityConditionActions.REQUEST_CITY_CONDITIONS:
           return {
@@ -37,6 +38,7 @@ export const reducer: Reducer<CityListState> = (state: CityListState, action: Po
             const exhaustiveCheck: never = action;
             break;
     }
-
     return state;
 };
+
+export default reducer;

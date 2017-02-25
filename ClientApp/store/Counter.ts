@@ -1,4 +1,5 @@
 import { Action, Reducer } from 'redux';
+import initialState from '../reducers/InitialState';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -44,5 +45,5 @@ export const reducer: Reducer<CounterState> = (state: CounterState, action: Know
 
     // For unrecognized actions (or in cases where actions have no effect), must return the existing state
     //  (or default initial state if none was supplied)
-    return state || { count: 0 };
+    return state || initialState.counter;
 };
