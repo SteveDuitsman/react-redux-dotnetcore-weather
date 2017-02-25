@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import CircularProgress from 'material-ui/CircularProgress';
 import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
 
 import { ApplicationState }  from '../models/Models';
 import * as CityConditionActions from '../actions/CityConditionActions';
@@ -84,14 +86,18 @@ class CityList extends React.Component<CityListProps, void> {
     return (
       <div>
         <h1>Weather Conditions</h1>
-        { 
-          !!this.props.forecasts && 
-          this.props.forecasts.map(conditions =>
-            <CityRow key={`${conditions.current_observation.display_location.latitude}${conditions.current_observation.display_location.longitude}`} 
-                     current_observation={conditions.current_observation} 
-                     response={conditions.response} />
-          )
-        }
+        <Paper zDepth={3}>
+          { 
+            !!this.props.forecasts && 
+            !!this.props.isLoading === false &&
+            this.props.forecasts.map(conditions =>
+              <CityRow key={`${conditions.current_observation.display_location.latitude}${conditions.current_observation.display_location.longitude}`} 
+                      current_observation={conditions.current_observation} 
+                      response={conditions.response} />
+            )
+          }
+        </Paper>          
+        {!!this.props.isLoading && <CircularProgress />}
       </div>
     );
   }
