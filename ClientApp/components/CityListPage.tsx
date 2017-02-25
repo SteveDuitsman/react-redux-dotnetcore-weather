@@ -51,10 +51,18 @@ class CityRow extends React.Component<CityRowProps, void> {
           <CardHeader
             title={this.props.current_observation.display_location.city + ', ' + this.props.current_observation.display_location.state}
             avatar={this.props.current_observation.icon_url}
-            subtitle={this.props.current_observation.temp_f+ 'F and ' + this.props.current_observation.icon }
-            actAsExpander={false}
-            showExpandableButton={false}
+            subtitle={this.props.current_observation.weather}
+            actAsExpander={true}
+            showExpandableButton={true}
           />
+          <CardText expandable={true}>
+            <p>Temperature {this.props.current_observation.temperature_string}</p>
+            <p>Feels like {this.props.current_observation.feelslike_string}</p>
+            <p>Winds {this.props.current_observation.wind_string}</p>
+            <p>Humidity {this.props.current_observation.relative_humidity}</p>
+            <p>Today's Precipitation {this.props.current_observation.precip_today_string}</p>
+            <small className="pull-right"><i>{this.props.current_observation.observation_time}</i></small>
+          </CardText>
           <CardActions>
             <FlatButton label="Detailed Forecast" />
             <FlatButton label="Radar" />
@@ -68,7 +76,7 @@ class CityRow extends React.Component<CityRowProps, void> {
 // At runtime, Redux will merge together...
 type CityListProps = CityListState                           // ... state we've requested from the Redux store
                      & typeof CityConditionActions.actionCreators   // ... plus action creators we've requested
-                    & { };                                   // ... plus incoming routing parameters
+                     & { };                                   // ... plus incoming routing parameters
 
 class CityList extends React.Component<CityListProps, void> {
 
@@ -97,7 +105,12 @@ class CityList extends React.Component<CityListProps, void> {
             )
           }
         </Paper>          
-        {!!this.props.isLoading && <CircularProgress />}
+        {
+          !!this.props.isLoading && 
+          <div>
+            <CircularProgress />
+          </div>
+        }
       </div>
     );
   }
