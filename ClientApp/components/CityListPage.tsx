@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
-import { ApplicationState }  from '../store';
-import * as CityListStore from '../store/CityListStore';
+import { ApplicationState }  from '../models/Models';
+import * as CityConditionActions from '../actions/CityConditionActions';
+import { CityConditions, CityListState, ConditionsState, ForecastSummaryState } from '../models/Models';
 
-type ConditionsProps = CityListStore.ConditionsState;
+type ConditionsProps = ConditionsState;
 
 class Conditions extends React.Component<ConditionsProps, void> {
   render() {
@@ -19,7 +20,7 @@ class Conditions extends React.Component<ConditionsProps, void> {
   }
 }
 
-type ForecastSummaryProps = CityListStore.ForecastSummaryState;
+type ForecastSummaryProps = ForecastSummaryState;
 
 class ForecastSummary extends React.Component<ForecastSummaryProps, void> {
   render() {
@@ -38,7 +39,7 @@ class ForecastSummary extends React.Component<ForecastSummaryProps, void> {
   }
 }
 
-type CityRowProps = CityListStore.CityConditions;
+type CityRowProps = CityConditions;
 
 class CityRow extends React.Component<CityRowProps, void> {
   render() {
@@ -63,10 +64,9 @@ class CityRow extends React.Component<CityRowProps, void> {
 }
 
 // At runtime, Redux will merge together...
-type CityListProps =
-    CityListStore.CityListState     // ... state we've requested from the Redux store
-    & typeof CityListStore.actionCreators   // ... plus action creators we've requested
-    & { };       // ... plus incoming routing parameters
+type CityListProps = CityListState                           // ... state we've requested from the Redux store
+                     & typeof CityConditionActions.actionCreators   // ... plus action creators we've requested
+                    & { };                                   // ... plus incoming routing parameters
 
 class CityList extends React.Component<CityListProps, void> {
 
@@ -99,5 +99,5 @@ class CityList extends React.Component<CityListProps, void> {
 
 export default connect(
     (state: ApplicationState) => state.cityList, // Selects which state properties are merged into the component's props
-    CityListStore.actionCreators                 // Selects which action creators are merged into the component's props
+    CityConditionActions.actionCreators                 // Selects which action creators are merged into the component's props
 )(CityList);

@@ -1,6 +1,7 @@
 import { fetch, addTask } from 'domain-task';
 import { Action, Reducer, ActionCreator } from 'redux';
-import { AppThunkAction } from './';
+import { AppThunkAction } from '../models/Models';
+import * as InitalState from '../reducers/InitialState';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -86,5 +87,5 @@ export const reducer: Reducer<WeatherForecastsState> = (state: WeatherForecastsS
             const exhaustiveCheck: never = action;
     }
 
-    return state || unloadedState;
+    return state || InitalState.weatherForecasts;
 };

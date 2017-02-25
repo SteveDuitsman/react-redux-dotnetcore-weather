@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { ApplicationState }  from '../store';
+import { ApplicationState }  from '../models/Models';
 import * as CounterStore from '../store/Counter';
 import * as WeatherForecasts from '../store/WeatherForecasts';
 
