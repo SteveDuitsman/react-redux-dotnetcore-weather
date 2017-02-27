@@ -74,9 +74,9 @@ class CityRow extends React.Component<CityRowProps, void> {
 }
 
 // At runtime, Redux will merge together...
-type CityListProps = CityListState                           // ... state we've requested from the Redux store
+type CityListProps = CityListState                                  // ... state we've requested from the Redux store
                      & typeof CityConditionActions.actionCreators   // ... plus action creators we've requested
-                     & { };                                   // ... plus incoming routing parameters
+                     & { };                                         // ... plus incoming routing parameters
 
 class CityList extends React.Component<CityListProps, void> {
 
