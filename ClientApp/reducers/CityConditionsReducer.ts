@@ -3,7 +3,8 @@ import { CityConditionActions, PossibleCityConditionActions } from "../actions/C
 import { ICity, ICityConditions, ICityListState, IConditionsState, IForecastSummaryState } from "../models/Models";
 import initialState from "../reducers/InitialState";
 
-const reducer: Reducer<ICityListState> = (state = initialState.cityList, action: PossibleCityConditionActions) => {
+const CityConditionsReducer: Reducer<ICityListState> = 
+  (state = initialState.cityList, action: PossibleCityConditionActions) => {
     switch (action.type) {
         case CityConditionActions.REQUEST_CITY_CONDITIONS:
           return {
@@ -38,4 +39,4 @@ const reducer: Reducer<ICityListState> = (state = initialState.cityList, action:
     return state;
 };
 
-export default reducer;
+export default CityConditionsReducer;

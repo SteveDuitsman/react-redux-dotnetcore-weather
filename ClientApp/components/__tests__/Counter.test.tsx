@@ -1,20 +1,32 @@
+import {shallow} from "enzyme";
 import * as React from "react";
-import * as TestUtils from "react-addons-test-utils";
-
-import {createStore} from "redux";
 
 import Counter from "../Counter";
 
-import { reducer } from "../../store/Counter";
+// function setup() {
+//   const props = {
+//     count: 0,
+//     increment: () => {
+//       let doNothing = true;
+//     },
+//   };
+
+//   const enzymeWrapper = shallow(<Counter {...props}/>);
+
+//   return {
+//     enzymeWrapper,
+//     props,
+//   };
+// }
 
 describe("<Counter />", () => {
-  it("tests successfully", () => {
+  it("should render", () => {
     expect(true).toBe(true);
-  });
 
-  it("renders", () => {
-    const store = createStore(reducer);
-    expect(true).toBe(true);
-    // expect(TestUtils.createRenderer().render(<Counter />)).toMatchSnapshot();
+    // let {enzymeWrapper} = setup();
+
+    // expect(enzymeWrapper.find("h1").text()).toBe("Counter");
+
+    // expect(enzymeWrapper.find("button").text()).toBe("Increment");
   });
 });
