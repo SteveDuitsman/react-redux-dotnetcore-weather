@@ -1,22 +1,23 @@
-import './css/site.css';
-import 'bootstrap';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { browserHistory, Router } from 'react-router';
-import { Provider } from 'react-redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import routes from './routes';
-import configureStore from './configureStore';
-import initialState from './reducers/InitialState';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import "bootstrap";
+import configureStore from "./configureStore";
+import "./css/site.css";
+import routes from "./routes";
+
+import { Provider } from "react-redux";
+import { browserHistory, Router } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
+import initialState from "./reducers/InitialState";
+
+import injectTapEventPlugin from "react-tap-event-plugin";
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
 // Get the application-wide store instance, prepopulating with state from the server where available.
-//const initialState = (window as any).initialReduxState as ApplicationState;
 const store = configureStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -26,5 +27,5 @@ ReactDOM.render(
     <Provider store={ store }>
         <Router history={ history } children={ routes } />
     </Provider>,
-    document.getElementById('react-app')
+    document.getElementById("react-app"),
 );

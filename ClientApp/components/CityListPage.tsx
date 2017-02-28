@@ -1,112 +1,53 @@
-import * as React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import CircularProgress from 'material-ui/CircularProgress';
-import FlatButton from 'material-ui/FlatButton';
-import Paper from 'material-ui/Paper';
+import CircularProgress from "material-ui/CircularProgress";
+import Paper from "material-ui/Paper";
+import * as React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router";
 
-import { ApplicationState }  from '../models/Models';
-import * as CityConditionActions from '../actions/CityConditionActions';
-import { CityConditions, CityListState, ConditionsState, ForecastSummaryState } from '../models/Models';
+import * as CityConditionActions from "../actions/CityConditionActions";
+import { IApplicationState }  from "../models/Models";
+import { ICityListState } from "../models/Models";
 
-type ConditionsProps = ConditionsState;
-
-class Conditions extends React.Component<ConditionsProps, void> {
-  render() {
-    return (
-      <div className="conditions">
-        <img src={this.props.icon_url} alt={this.props.icon} />
-      </div>
-    );
-  }
-}
-
-type ForecastSummaryProps = ForecastSummaryState;
-
-class ForecastSummary extends React.Component<ForecastSummaryProps, void> {
-  render() {
-    return (
-      <div className="forecast-summary">
-        <div className="city">
-          <strong>{this.props.city}, {this.props.state}</strong>
-        </div>
-        <div className="temps">
-          <strong>{this.props.current_temp}</strong>
-          {false && <p>{this.props.highTemp}&nbsp;|&nbsp;{this.props.lowTemp}</p>}
-          {false && <p><i className="fa fa-tint fa-lg"></i>{this.props.precipitationChance}%</p>}
-        </div>
-      </div>
-    );
-  }
-}
-
-type CityRowProps = CityConditions;
-
-class CityRow extends React.Component<CityRowProps, void> {
-  render() {
-    return (
-      <div>
-        <Card>
-          <CardHeader
-            title={this.props.current_observation.display_location.city + ', ' + this.props.current_observation.display_location.state}
-            avatar={this.props.current_observation.icon_url}
-            subtitle={this.props.current_observation.weather}
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText expandable={true}>
-            <p>Temperature {this.props.current_observation.temperature_string}</p>
-            <p>Feels like {this.props.current_observation.feelslike_string}</p>
-            <p>Winds {this.props.current_observation.wind_string}</p>
-            <p>Humidity {this.props.current_observation.relative_humidity}</p>
-            <p>Today's Precipitation {this.props.current_observation.precip_today_string}</p>
-            <small className="pull-right"><i>{this.props.current_observation.observation_time}</i></small>
-          </CardText>
-          <CardActions>
-            <FlatButton label="Detailed Forecast" />
-            <FlatButton label="Radar" />
-          </CardActions>
-        </Card>
-      </div>
-    );
-  }
-}
+import CityConditionsRow from "./CityConditionsRow";
 
 // At runtime, Redux will merge together...
-type CityListProps = CityListState                                  // ... state we've requested from the Redux store
-                     & typeof CityConditionActions.actionCreators   // ... plus action creators we've requested
+type CityListProps = ICityListState                                  // ... state we"ve requested from the Redux store
+                     & typeof CityConditionActions.actionCreators   // ... plus action creators we"ve requested
                      & { };                                         // ... plus incoming routing parameters
 
 class CityList extends React.Component<CityListProps, void> {
 
-  componentWillMount() {
+  public componentWillMount() {
       // This method runs when the component is first added to the page
       this.props.requestCityConditionsList(this.props.cityList);
   }
 
-  componentWillReceiveProps(nextProps: CityListProps) {
+  public componentWillReceiveProps(nextProps: CityListProps) {
       // This method runs when incoming props (e.g., route params) change
-      //this.props.requestCityConditionsList(nextProps.cityList);
+      // this.props.requestCityConditionsList(nextProps.cityList);
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <h1>Weather Conditions</h1>
         <Paper zDepth={3}>
-          { 
-            !!this.props.forecasts && 
+          {
+            !!this.props.forecasts &&
             !!this.props.isLoading === false &&
-            this.props.forecasts.map(conditions =>
-              <CityRow key={`${conditions.current_observation.display_location.latitude}${conditions.current_observation.display_location.longitude}`} 
-                      current_observation={conditions.current_observation} 
-                      response={conditions.response} />
+            this.props.forecasts.map((conditions) =>
+              <CityConditionsRow
+                key={
+                  `${conditions.current_observation.display_location.latitude}
+                  ${conditions.current_observation.display_location.longitude}`
+                }
+                current_observation={conditions.current_observation}
+                response={conditions.response} />,
             )
           }
         </Paper>          
         {
-          !!this.props.isLoading && 
+          !!this.props.isLoading &&
           <div>
             <CircularProgress />
           </div>
@@ -117,8 +58,10 @@ class CityList extends React.Component<CityListProps, void> {
 }
 
 export default connect(
-    (state: ApplicationState) => {
+    // Selects which state properties are merged into the component"s props
+    (state: IApplicationState) => {
       return state.cityList;
-    }, // Selects which state properties are merged into the component's props
-    CityConditionActions.actionCreators                 // Selects which action creators are merged into the component's props
+    },
+    // Selects which action creators are merged into the component"s props
+    CityConditionActions.actionCreators,
 )(CityList);

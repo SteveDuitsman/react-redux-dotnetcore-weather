@@ -1,14 +1,15 @@
-import * as React from 'react';
-import { Router, Route, HistoryBase } from 'react-router';
-import { Layout } from './components/Layout';
-import Home from './components/Home';
-import FetchData from './components/FetchData';
-import Counter from './components/Counter';
-import CityListPage from './components/CityListPage';
+import * as React from "react";
+import { HistoryBase, Route, Router } from "react-router";
+
+import CityListPage from "./components/CityListPage";
+import Counter from "./components/Counter";
+import FetchData from "./components/FetchData";
+import Home from "./components/Home";
+import { Layout } from "./components/Layout";
 
 export default <Route component={ Layout }>
-    <Route path='/' components={{ body: Home }} />
-    <Route path='/citylistpage' components={{ body: CityListPage }} />
+    <Route path="/" components={{ body: Home }} />
+    <Route path="/citylistpage" components={{ body: CityListPage }} />
 </Route>;
 
 // Enable Hot Module Replacement (HMR)

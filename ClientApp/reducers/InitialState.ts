@@ -1,22 +1,22 @@
-import { ApplicationState } from '../models/Models';
-import initialForecasts from './sample json/city forecast data.json';
+import { IApplicationState } from "../models/Models";
+import initialForecasts from "./sample json/city forecast data.json";
 
 export default {
-  counter: { 
-    count: 0 
-  },
-  weatherForecasts: { 
-    startDateIndex: null, 
-    forecasts: [], 
-    isLoading: false 
-  },
   cityList: {
-    isLoading: false,
-    cityList: [ 
+    cityList: [
       {City: "New Berlin", State: "WI", Zip: 53151},
       {City: "Wauwatosa", State: "WI", Zip: 53226},
-      {City: "San Antonio", State: "TX", Zip: 78201},     
+      {City: "San Antonio", State: "TX", Zip: 78201},
     ],
-    forecasts: []//initialForecasts
-  }
-} as ApplicationState
+    forecasts: [],
+    isLoading: false,
+  },
+  counter: {
+    count: 0,
+  },
+  weatherForecasts: {
+    forecasts: [],
+    isLoading: false,
+    startDateIndex: null,
+  },
+} as IApplicationState;
