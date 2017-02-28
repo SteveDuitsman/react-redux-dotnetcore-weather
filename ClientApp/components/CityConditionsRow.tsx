@@ -12,10 +12,10 @@ class CityConditionsRow extends React.Component<CityConditionsRowProps, void> {
         <Card>
           <CardHeader
             title={
-                    this.props.current_observation.display_location.city +
-                    ", " +
-                    this.props.current_observation.display_location.state
-                  }
+              this.props.current_observation.display_location.city +
+              ", " +
+              this.props.current_observation.display_location.state
+            }
             avatar={this.props.current_observation.icon_url}
             subtitle={this.props.current_observation.weather}
             actAsExpander={true}

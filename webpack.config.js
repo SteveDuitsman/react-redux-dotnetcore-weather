@@ -21,7 +21,9 @@ module.exports = (env) => {
                 { test: /\.tsx?$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' }
             ]
         },
-        plugins: [new CheckerPlugin()]
+        plugins: [
+            new CheckerPlugin()
+        ]
     });
 
     // Configuration for client-side bundle suitable for running in browsers
