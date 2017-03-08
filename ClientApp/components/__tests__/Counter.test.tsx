@@ -1,32 +1,44 @@
-import {shallow} from "enzyme";
+import {render, shallow} from "enzyme";
 import * as React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 import Counter from "../Counter";
 
-// function setup() {
-//   const props = {
-//     count: 0,
-//     increment: () => {
-//       let doNothing = true;
-//     },
-//   };
+import {reducer} from "../../store/Counter";
 
-//   const enzymeWrapper = shallow(<Counter {...props}/>);
+function setup() {
+  const props = {
+    count: 0,
+    increment: () => {
+      let doNothing = true;
+    },
+  };
 
-//   return {
-//     enzymeWrapper,
-//     props,
-//   };
-// }
+  let store = createStore(reducer);
+
+  const enzymeWrapper = shallow(
+    <Provider store={store} >
+      <Counter {...props} />
+    </Provider>,
+  );
+
+  return {
+    enzymeWrapper,
+    props,
+  };
+}
 
 describe("<Counter />", () => {
   it("should render", () => {
-    expect(true).toBe(true);
+    let {enzymeWrapper} = setup();
 
-    // let {enzymeWrapper} = setup();
+    // expect(enzymeWrapper.html()).toBe(
+    //   `<div class="in-foo"></div>`,
+    // );
 
-    // expect(enzymeWrapper.find("h1").text()).toBe("Counter");
+    expect(enzymeWrapper.find("h1").text()).toBe("Counter");
 
-    // expect(enzymeWrapper.find("button").text()).toBe("Increment");
+    expect(enzymeWrapper.find("button").text()).toBe("Increment");
   });
 });

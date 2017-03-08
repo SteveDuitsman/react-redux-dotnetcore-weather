@@ -60,6 +60,7 @@
     "tslint": "^4.5.1"
   },
   "jest": {
+    "verbose": true,
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
